@@ -18,7 +18,6 @@ void UploadThread::run(){
       Bloque tant qu'il n'y a rien à lire
      */
     clientConnection->waitForReadyRead(-1);
-    while(clientConnection->state()==QAbstractSocket::ConnectedState);
 }
 
 void UploadThread::readData(){
@@ -45,5 +44,6 @@ void UploadThread::sendData(QString fileName){
         tmp=mediaAlikeList.at(i).getDate();
         writeQStringSock(tmp,clientConnection);
     }
+    clientConnection->flush();
 }
 
